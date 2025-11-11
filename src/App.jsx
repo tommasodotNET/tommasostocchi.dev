@@ -2,6 +2,34 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const handleCardMouseEnter = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const centerX = rect.width / 2;
+    
+    // Determina direzione in base a dove entra il mouse
+    if (x > centerX) {
+      // Entra da destra: shimmer da destra a sinistra
+      card.style.setProperty('--shimmer-angle', '-45deg');
+      card.style.setProperty('--shimmer-start', '100%');
+      card.style.setProperty('--shimmer-end', '-100%');
+    } else {
+      // Entra da sinistra: shimmer da sinistra a destra
+      card.style.setProperty('--shimmer-angle', '45deg');
+      card.style.setProperty('--shimmer-start', '-100%');
+      card.style.setProperty('--shimmer-end', '100%');
+    }
+  };
+
+  const handleCardMouseLeave = (e) => {
+    const card = e.currentTarget;
+    // Reset per prossimo ingresso
+    card.style.removeProperty('--shimmer-angle');
+    card.style.removeProperty('--shimmer-start');
+    card.style.removeProperty('--shimmer-end');
+  };
+
   return (
     <div className="app">
       <div className="hero-section">
@@ -19,7 +47,11 @@ function App() {
             </p>
 
             <section className="links-section">
-            <div className="card">
+            <div 
+              className="card"
+              onMouseEnter={handleCardMouseEnter}
+              onMouseLeave={handleCardMouseLeave}
+            >
               <h2>📝 Blog</h2>
               <p>Read my latest articles and thoughts on software development.</p>
               <a 
@@ -32,7 +64,11 @@ function App() {
               </a>
             </div>
 
-            <div className="card">
+            <div 
+              className="card"
+              onMouseEnter={handleCardMouseEnter}
+              onMouseLeave={handleCardMouseLeave}
+            >
               <h2>📚 Books</h2>
               <p>Check out my published books and writing projects.</p>
               <a 
@@ -45,22 +81,26 @@ function App() {
               </a>
             </div>
 
-            <div className="card">
-              <h2>💼 Projects</h2>
-              <p>Explore my open source projects and contributions.</p>
+            <div 
+              className="card"
+              onMouseEnter={handleCardMouseEnter}
+              onMouseLeave={handleCardMouseLeave}
+            >
+              <h2>🎥 Conferences</h2>
+              <p>Watch my conference talks and presentations.</p>
               <a 
-                href="https://github.com/tommasodotnet" 
+                href="https://www.youtube.com/playlist?list=PLM6abhhRsQMftz6qMejjE21BcpywZ-vTE" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn"
               >
-                GitHub Profile
+                Watch Videos
               </a>
             </div>
           </section>
 
           <section className="social">
-            <h2>Connect</h2>
+            <h2>Let's connect</h2>
             <div className="social-links">
               <a href="https://bsky.tommasostocchi.dev" target="_blank" rel="noopener noreferrer">Bluesky</a>
               <a href="https://linkedin.tommasostocchi.dev" target="_blank" rel="noopener noreferrer">LinkedIn</a>
