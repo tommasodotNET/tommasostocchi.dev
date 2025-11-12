@@ -53,7 +53,7 @@ function App() {
               onMouseLeave={handleCardMouseLeave}
             >
               <h2>📝 Blog</h2>
-              <p>Read my latest articles and thoughts on software development.</p>
+              <p>Read my latest articles and thoughts.</p>
               <a 
                 href="https://dev.to/tommasodotnet" 
                 target="_blank" 
